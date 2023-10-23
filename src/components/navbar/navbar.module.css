@@ -1,5 +1,5 @@
 .container {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100px;
@@ -26,10 +26,15 @@
     align-items: center;
 }
 
+.burger {
+    display: none;
+}
+
 @media screen and (max-width: 1280px) {
     .logo {
         font-size: 32px;
     }
+
     .links {
         font-size: 18px;
         gap: 15px;
@@ -40,6 +45,7 @@
     .socials {
         display: none;
     }
+
     .logo {
         text-align: left;
     }
@@ -52,9 +58,41 @@
 }
 
 @media screen and (max-width: 640px) {
-    /* .links {
+    .links {
+        display: none;
+    }
+
+    .burger {
         display: flex;
         flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .line {
+        border-bottom: 2px solid var(--textColor);
+        width: 30px;
+    }
+
+    .x {
+        font-weight: normal;
+        font-size: 30px;
+        color: var(--textColor);
+    }
+
+    .responsiveMenu {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+        flex: 1;
+        font-size: 30px;
+        gap: 30px;
+        position: absolute;
+        width: 100vw;
+        left: 0;
         height: calc(100vh - 100px);
-    } */
+        top: 100px;
+        align-items: center;
+        justify-content: center;
+    }
 }
