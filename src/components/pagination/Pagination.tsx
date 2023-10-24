@@ -3,7 +3,9 @@ import styles from './pagination.module.css';
 const Pagination = () => {
     return (
         <>
-            Pagination
+             <div className={styles.container}>
+                Pagination
+             </div>
         </>
     )
 };

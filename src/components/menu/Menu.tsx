@@ -3,7 +3,9 @@ import styles from './menu.module.css';
 const Menu = () => {
     return (
         <>
-            Menu
+            <div className={styles.container}>
+                Menu
+            </div>
         </>
     )
 };
