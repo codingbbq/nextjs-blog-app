@@ -1,17 +1,19 @@
+import { signOut, useSession } from 'next-auth/react';
 import styles from './authlinks.module.css';
 import Link from 'next/link';
 
 const AuthLinks = () => {
-    const status = false;
+    const {status} = useSession();
+
     return (
         <>
             {
-                status ? (
+                status === 'unauthenticated' ? (
                     <Link href='/login'>Login</Link>
                 ) : (
                     <>
                         <Link href='/write'>Write</Link>
-                        <span className={styles.link}>Logout</span>
+                        <span className={styles.link} onClick={signOut}>Logout</span>
                     </>
                 )
             }
