@@ -1,84 +1,47 @@
 import styles from "./categorylist.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { Category } from "../../../types";
 
-const CategoryList = () => {
-  return (
-    <>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Popular Category</h1>
-        <div className={styles.categories}>
-            <Link href="blog?cat=style" className={`${styles.category} ${styles.style}`}>
-                <Image
-                    src="/style.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                style
-            </Link>
+const getCategoriesData = async () => {
+	const res = await fetch("http://localhost:3000/api/categories", {
+		cache: "no-cache",
+	});
 
-            <Link href="blog?cat=fashion" className={`${styles.category} ${styles.fashion}`}>
-                <Image
-                    src="/fashion.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                fashion
-            </Link>
+	if (!res.ok) {
+		throw new Error("Error in fetching categoreis list");
+	}
 
-            <Link href="blog?cat=food" className={`${styles.category} ${styles.food}`}>
-                <Image
-                    src="/food.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                food
-            </Link>
+	return res.json();
+};
 
-            <Link href="blog?cat=travel" className={`${styles.category} ${styles.travel}`}>
-                <Image
-                    src="/travel.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                travel
-            </Link>
-
-            <Link href="blog?cat=culture" className={`${styles.category} ${styles.culture}`}>
-                <Image
-                    src="/culture.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                culture
-            </Link>
-
-            <Link href="blog?cat=coding" className={`${styles.category} ${styles.coding}`}>
-                <Image
-                    src="/coding.png"
-                    alt=""
-                    width={32}
-                    height={32}
-                    className={styles.image} 
-                />
-                coding
-            </Link>
-
-
-        </div>
-      </div>
-    </>
-  );
+const CategoryList = async () => {
+	const data: Category[] = await getCategoriesData();
+	return (
+		<>
+			<div className={styles.container}>
+				<h1 className={styles.title}>Popular Category</h1>
+				<div className={styles.categories}>
+					{data.map((category) => (
+						<Link
+                            key={category._id}
+							href={`blog?cat=${category.slug}`}
+							className={`${styles.category} ${styles[category.slug]}`}
+						>
+							{category.image && <Image
+								src={category.image}
+								alt={category.title}
+								width={32}
+								height={32}
+								className={styles.image}
+							/>}
+							{category.slug}
+						</Link>
+					))}
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default CategoryList;
