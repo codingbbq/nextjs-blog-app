@@ -12,3 +12,9 @@
     cursor: pointer;
     font-style: 18px;
 }
+
+.button:disabled {
+    background-color: rgba(220, 20, 60, 0.265);
+    color: #ddd;
+    cursor: not-allowed;
+}

@@ -3,14 +3,18 @@ import styles from './homepage.module.css';
 import CategoryList from '@/components/categoryList/CategoryList';
 import CardList from '@/components/cardList/CardList';
 import Menu from '@/components/menu/Menu';
+import { QueryParams } from '../../types';
 
-export default function Home() {
+export default function Home({ searchParams }: QueryParams) {
+
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+
   return (
     <>
       <Featured />
       <CategoryList />
       <div className={styles.content}>
-        <CardList />
+        <CardList page={page} />
         <Menu />
       </div>
     </>
