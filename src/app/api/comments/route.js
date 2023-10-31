@@ -26,7 +26,7 @@ export const GET = async (req) => {
 
 // Create a Comment
 export const POST = async (req) => {
-	const session = getAuthSession();
+	const session = await getAuthSession();
 
 	if (!session) {
 		return new NextResponse(

@@ -18,7 +18,8 @@ const getPostData = async (slug: string) => {
 
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
 	const { slug } = params;
-	const data: Post & { user: User } = await getPostData(slug);
+	const data: any = await getPostData(slug);
+    
 	return (
 		<>
 			<div>
