@@ -19,18 +19,17 @@ const getPostData = async (slug: string) => {
 const SinglePage = async ({ params }: { params: { slug: string } }) => {
 	const { slug } = params;
 	const data: any = await getPostData(slug);
-    
 	return (
 		<>
 			<div>
 				<div className={styles.infoContainer}>
 					<div className={styles.textContainer}>
-						<h1 className={styles.title}>{data?.title}</h1>
+						<h1 className={styles.title}>{data?.post?.title}</h1>
 						<div className={styles.user}>
-							{data?.user?.image && (
+							{data?.post?.user?.image && (
 								<div className={styles.userImageContainer}>
 									<Image
-										src={data?.user?.image}
+										src={data?.post?.user?.image}
 										alt=""
 										fill
 										className={styles.avatar}
@@ -39,19 +38,19 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
 							)}
 							<div className={styles.userTextContainer}>
 								<span className={styles.username}>
-									{data?.user?.name}
+									{data?.post?.user?.name}
 								</span>
 								<span className={styles.date}>
-									{data?.createdAt}
+									{data?.post?.createdAt}
 								</span>
 							</div>
 						</div>
 					</div>
-					{data?.image && (
+					{data?.post?.image && (
 						<div className={styles.imgContainer}>
 							<Image
-								src={data?.image}
-								alt={data?.title}
+								src={data?.post?.image}
+								alt={data?.post?.title}
 								fill
 								className={styles.avatar}
 							/>
@@ -60,7 +59,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
 				</div>
 				<div className={styles.content}>
 					<div className={styles.post}>
-						<div className={styles.description}>{data?.desc}</div>
+						<div className={styles.description} dangerouslySetInnerHTML={{__html: data?.post?.desc}} />
 
 						<div className={styles.comments}>
 							<Comments postSlug={slug} />

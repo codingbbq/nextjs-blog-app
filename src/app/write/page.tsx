@@ -13,10 +13,11 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { firebaseapp } from "@/utils/firebase";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 
 const WritePage = () => {
   const { status } = useSession();
+  const ReactQuill = dynamic(() => import('react-quill'), { ssr: false});
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -120,7 +121,7 @@ const WritePage = () => {
             <input
               type="file"
               id="image"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
               style={{ display: "none" }}
             />
             <button className={styles.addButton}>

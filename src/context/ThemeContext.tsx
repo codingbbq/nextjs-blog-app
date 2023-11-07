@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
+import { ITheme, Props } from "../../types";
 
 export const ThemeContext = createContext<ITheme | null>(null);
 
@@ -9,6 +10,7 @@ const getFromLocalStorage = () => {
         const value = localStorage.getItem('theme');
         return value || "light";
     }
+    return "light";
 }
 
 export const ThemeContextProvider = ({ children }: Props) => {
